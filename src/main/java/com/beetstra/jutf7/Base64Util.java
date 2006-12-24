@@ -77,7 +77,7 @@ class Base64Util {
 	 * @return The six bits, as an integer value, or -1 if the byte is not in the alphabet
 	 */
 	int getSextet(final byte ch) {
-		if (ch > 128)
+		if (ch >= 128)
 			return -1;
 		return inverseAlphabet[ch];
 	}
@@ -89,7 +89,7 @@ class Base64Util {
 	 * @return true if the alphabet contains <code>ch</code>, false otherwise
 	 */
 	boolean contains(final char ch) {
-		if (ch > 128)
+		if (ch >= 128)
 			return false;
 		return inverseAlphabet[ch] >= 0;
 	}
