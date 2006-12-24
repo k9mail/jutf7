@@ -34,9 +34,6 @@ class ModifiedUTF7Charset extends UTF7StyleCharset {
 	private static final String MODIFIED_BASE64_ALPHABET = "ABCDEFGHIJKLMNOPQRSTUVWXYZ"
 			+ "abcdefghijklmnopqrstuvwxyz" + "0123456789+,";
 
-	/**
-	 * {@inheritDoc}
-	 */
 	ModifiedUTF7Charset(String name, String[] aliases) {
 		super(name, aliases, MODIFIED_BASE64_ALPHABET, true);
 	}
