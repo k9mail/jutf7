@@ -1,6 +1,7 @@
 <project xmlns="http://maven.apache.org/POM/4.0.0"
 	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
 	xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/maven-v4_0_0.xsd">
+	<modelVersion>4.0.0</modelVersion>
 	<groupId>com.beetstra.jutf7</groupId>
 	<artifactId>jutf7</artifactId>
 	<packaging>jar</packaging>
@@ -40,7 +41,19 @@
 			<url>http://beetstra.com</url>
 		</developer>
 	</developers>
-	<modelVersion>4.0.0</modelVersion>
+	<scm>
+		<connection>
+			scm:svn:https://jutf7.svn.sourceforge.net/svnroot/jutf7/trunk
+		</connection>
+		<developerConnection>
+			scm:svn:https://jutf7.svn.sourceforge.net/svnroot/jutf7/trunk
+		</developerConnection>
+		<url>http://svn.sourceforge.net/jutf7</url>
+	</scm>
+	<issueManagement>
+		<system>SourceForge</system>
+		<url>http://sourceforge.net/tracker/?group_id=185176</url>
+	</issueManagement>
 	<dependencies>
 		<dependency>
 			<groupId>junit</groupId>
@@ -51,6 +64,14 @@
 	</dependencies>
 	<build>
 		<plugins>
+			<plugin>
+				<groupId>org.apache.maven.plugins</groupId>
+				<artifactId>maven-compiler-plugin</artifactId>
+				<configuration>
+					<source>1.4</source>
+					<target>1.4</target>
+				</configuration>
+			</plugin>
 			<plugin>
 				<groupId>org.apache.maven.plugins</groupId>
 				<artifactId>maven-jar-plugin</artifactId>
@@ -70,10 +91,35 @@
 					</archive>
 				</configuration>
 			</plugin>
+			<plugin>
+				<groupId>org.apache.maven.plugins</groupId>
+				<artifactId>maven-source-plugin</artifactId>
+				<configuration>
+					<attach>true</attach>
+				</configuration>
+			</plugin>
 		</plugins>
 	</build>
 	<reporting>
 		<plugins>
+			<plugin>
+				<groupId>org.apache.maven.plugins</groupId>
+				<artifactId>
+					maven-project-info-reports-plugin
+				</artifactId>
+				<reportSets>
+					<reportSet>
+						<reports>
+							<report>summary</report>
+							<report>dependencies</report>
+							<report>issue-tracking</report>
+							<report>project-team</report>
+							<report>license</report>
+							<report>scm</report>
+						</reports>
+					</reportSet>
+				</reportSets>
+			</plugin>
 			<plugin>
 				<groupId>org.apache.maven.plugins</groupId>
 				<artifactId>maven-jxr-plugin</artifactId>
@@ -97,10 +143,6 @@
 						</list>
 					</links>
 				</configuration>
-			</plugin>
-			<plugin>
-				<groupId>org.apache.maven.plugins</groupId>
-				<artifactId>maven-pmd-plugin</artifactId>
 			</plugin>
 		</plugins>
 	</reporting>
