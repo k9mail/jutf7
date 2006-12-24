@@ -110,6 +110,7 @@
 				<reportSets>
 					<reportSet>
 						<reports>
+							<report>index</report>
 							<report>summary</report>
 							<report>dependencies</report>
 							<report>issue-tracking</report>
