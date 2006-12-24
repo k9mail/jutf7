@@ -30,7 +30,7 @@ import java.util.Arrays;
 import java.util.List;
 
 /**
- * Abstract base class for UTF-7 style encoding and decoding.
+ * <p>Abstract base class for UTF-7 style encoding and decoding.</p>
  * 
  * @author Jaap Beetstra
  */
@@ -41,12 +41,12 @@ abstract class UTF7StyleCharset extends Charset {
 	Base64Util base64;
 
 	/**
-	 * Besides the name and aliases, two additional parameters are required. First the 
+	 * <p>Besides the name and aliases, two additional parameters are required. First the 
 	 * base 64 alphabet used; in modified UTF-7 a slightly different alphabet is used. 
 	 * Additionally, it should be specified if encoders and decoders should be strict 
 	 * about the interpretation of malformed encoded sequences. This is used since 
 	 * modified UTF-7 specifically disallows some constructs which are allowed (or not 
-	 * specifically disallowed) in UTF-7 (RFC 2152). 
+	 * specifically disallowed) in UTF-7 (RFC 2152).</p>
 	 * 
 	 * @param canonicalName The name as defined in java.nio.charset.Charset
 	 * @param aliases The aliases as defined in java.nio.charset.Charset

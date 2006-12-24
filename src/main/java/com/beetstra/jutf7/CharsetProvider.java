@@ -30,8 +30,8 @@ import java.util.Iterator;
 import java.util.List;
 
 /**
- *  Charset service-provider class used for both variants of the UTF-7 charset 
- *  and the modified-UTF-7 charset.
+ * <p>Charset service-provider class used for both variants of the UTF-7 charset 
+ * and the modified-UTF-7 charset.</p>
  * 
  * @author Jaap Beetstra
  */

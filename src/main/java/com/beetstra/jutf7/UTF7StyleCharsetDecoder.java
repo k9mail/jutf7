@@ -29,8 +29,8 @@ import java.nio.charset.CharsetDecoder;
 import java.nio.charset.CoderResult;
 
 /**
- * The CharsetDecoder used to decode both variants of the UTF-7 charset and the 
- * modified-UTF-7 charset.
+ * <p>The CharsetDecoder used to decode both variants of the UTF-7 charset and the 
+ * modified-UTF-7 charset.</p>
  * 
  * @author Jaap Beetstra
  */
@@ -101,8 +101,8 @@ class UTF7StyleCharsetDecoder extends CharsetDecoder {
 	}
 
 	/**
-	 * Decodes a byte in <i>base 64 mode</i>. Will directly write a character to the output 
-	 * buffer if completed.
+	 * <p>Decodes a byte in <i>base 64 mode</i>. Will directly write a character to the output 
+	 * buffer if completed.</p>
 	 * 
 	 * @param in The input buffer
 	 * @param out The output buffer
@@ -152,8 +152,8 @@ class UTF7StyleCharsetDecoder extends CharsetDecoder {
 	}
 
 	/**
-	 * Resets the input buffer position to just before the last byte read, and returns
-	 * a result indicating to skip the last byte. 
+	 * <p>Resets the input buffer position to just before the last byte read, and returns
+	 * a result indicating to skip the last byte.</p>
 	 * 
 	 * @param in The input buffer
 	 * @return CoderResult.malformedForLength(1);
@@ -171,7 +171,8 @@ class UTF7StyleCharsetDecoder extends CharsetDecoder {
 	}
 
 	/**
-	 * Indicates the decoder is no longer in <i>base 64 mode</i>
+	 * <p>Updates internal state to reflect the decoder is no longer in <i>base 64 
+	 * mode</i></p>
 	 */
 	private void setUnshifted() {
 		base64mode = false;

@@ -29,13 +29,13 @@ import java.nio.charset.CharsetEncoder;
 import java.nio.charset.CoderResult;
 
 /**
- * The CharsetEncoder used to encode both variants of the UTF-7 charset and the 
- * modified-UTF-7 charset.
+ * <p>The CharsetEncoder used to encode both variants of the UTF-7 charset and the 
+ * modified-UTF-7 charset.</p>
  * 
- * <strong>Please note this class does not behave strictly according to the specification in 
- * Sun Java VMs before 1.6. This is done to get around a bug in the implementation of
- * {@link java.nio.charset.CharsetEncoder#encode(CharBuffer)}. Unfortunately, that method 
- * cannot be overridden.
+ * <p><strong>Please note this class does not behave strictly according to the specification in 
+ * Sun Java VMs before 1.6.</strong> This is done to get around a bug in the implementation 
+ * of {@link java.nio.charset.CharsetEncoder#encode(CharBuffer)}. Unfortunately, that method 
+ * cannot be overridden.</p>
  *  
  * @see <a href="http://bugs.sun.com/bugdatabase/view_bug.do?bug_id=6221056">JDK bug 6221056</a>
  * 
@@ -110,8 +110,8 @@ class UTF7StyleCharsetEncoder extends CharsetEncoder {
 	 * though there is sufficient space available in the output buffer. This is done 
 	 * to force the broken implementation of 
 	 * {@link java.nio.charset.CharsetEncoder#encode(CharBuffer)} to call flush 
-	 * (the buggy method is <code>final</code>, thus cannot be overridden).
-	 * Unfortunately, String.getBytes() failes if CoderResult.OVERFLOW is returned, since
+	 * (the buggy method is <code>final</code>, thus cannot be overridden).</p>
+	 * <p>However, String.getBytes() fails if CoderResult.OVERFLOW is returned, since
 	 * this assumes it always allocates sufficient bytes (maxBytesPerChar * nr_of_chars).
 	 * Thus, as an extra check, the size of the input buffer is compared against the size
 	 * of the output buffer.
@@ -151,8 +151,8 @@ class UTF7StyleCharsetEncoder extends CharsetEncoder {
 	}
 
 	/**
-	 * Writes the bytes necessary to leave <i>base 64 mode</i>. This might include an unshift 
-	 * character.
+	 * <p>Writes the bytes necessary to leave <i>base 64 mode</i>. This might include an unshift 
+	 * character.</p>
 	 *  
 	 * @param out
 	 * @param ch
@@ -170,9 +170,9 @@ class UTF7StyleCharsetEncoder extends CharsetEncoder {
 	}
 
 	/**
-	 * Writes the bytes necessary to encode a character in <i>base 64 mode</i>. All bytes
+	 * <p>Writes the bytes necessary to encode a character in <i>base 64 mode</i>. All bytes
 	 * which are fully determined will be written. The fields <code>bitsToOutput</code> and
-	 * <code>sextet</code> are used to remember the bytes not yet fully determined.
+	 * <code>sextet</code> are used to remember the bytes not yet fully determined.</p>
 	 *  
 	 * @param out
 	 * @param ch
