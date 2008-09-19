@@ -28,6 +28,7 @@ import java.nio.charset.Charset;
 import java.util.Arrays;
 import java.util.Iterator;
 import java.util.List;
+import java.util.Locale;
 
 /**
  * <p>Charset service-provider class used for both variants of the UTF-7 charset 
@@ -58,7 +59,7 @@ public class CharsetProvider extends java.nio.charset.spi.CharsetProvider {
 	 * {@inheritDoc}
 	 */
 	public Charset charsetForName(String charsetName) {
-		charsetName = charsetName.toUpperCase();
+		charsetName = charsetName.toUpperCase(Locale.US);
 		for (Iterator iter = charsets.iterator(); iter.hasNext();) {
 			Charset charset = (Charset) iter.next();
 			if (charset.name().equals(charsetName))
@@ -95,7 +96,7 @@ public class CharsetProvider extends java.nio.charset.spi.CharsetProvider {
 	private static void showUsage() {
 		System.out.println("Usage: java -jar jutf7.jar [encode|decode] <text>");
 		System.out.println();
-		System.out.println("Example: java -jar jutf7 encode café");
+		System.out.println("Example: java -jar jutf7 encode cafï¿½");
 		System.out.println("Result: caf+AOk-");
 	}
 }
