@@ -26,6 +26,8 @@ package com.beetstra.jutf7;
 import java.nio.charset.Charset;
 import java.util.HashSet;
 import java.util.Iterator;
+import java.util.Locale;
+
 import junit.framework.TestCase;
 
 public class CharsetProviderTest extends TestCase {
@@ -82,5 +84,10 @@ public class CharsetProviderTest extends TestCase {
 		assertTrue(found.contains(charset1));
 		assertTrue(found.contains(charset2));
 		assertTrue(found.contains(charset3));
+	}
+
+	public void testTurkish() throws Exception {
+		Locale.setDefault(new Locale("tr", "TR"));
+		assertEquals(tested.charsetForName("UTF-7"), tested.charsetForName("unicode-1-1-utf-7"));
 	}
 }
