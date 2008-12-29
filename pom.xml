@@ -1,11 +1,9 @@
-<project xmlns="http://maven.apache.org/POM/4.0.0"
-	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
-	xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/maven-v4_0_0.xsd">
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/maven-v4_0_0.xsd">
 	<modelVersion>4.0.0</modelVersion>
 	<groupId>com.beetstra.jutf7</groupId>
 	<artifactId>jutf7</artifactId>
 	<packaging>jar</packaging>
-	<version>1.0.0-SNAPSHOT</version>
+	<version>1.0.0</version>
 	<name>jutf7</name>
 	<url>http://jutf7.sourceforge.net/</url>
 	<description>
@@ -46,9 +44,9 @@
 		<url>http://sourceforge.net</url>
 	</organization>
 	<scm>
-		<connection>scm:svn:https://jutf7.svn.sourceforge.net/svnroot/jutf7/trunk</connection>
-		<developerConnection>scm:svn:https://jutf7.svn.sourceforge.net/svnroot/jutf7/trunk</developerConnection>
-		<url>http://svn.sourceforge.net/jutf7</url>
+		<connection>scm:svn:https://jutf7.svn.sourceforge.net/svnroot/jutf7/tags/jutf7-1.0.0</connection>
+		<developerConnection>scm:svn:https://jutf7.svn.sourceforge.net/svnroot/jutf7/tags/jutf7-1.0.0</developerConnection>
+		<url>http://svn.sourceforge.net/jutf7/tags/jutf7-1.0.0</url>
 	</scm>
 	<distributionManagement>
 		<repository>
