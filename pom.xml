@@ -46,14 +46,17 @@
 		<url>http://sourceforge.net</url>
 	</organization>
 	<scm>
-		<connection>
-			scm:svn:https://jutf7.svn.sourceforge.net/svnroot/jutf7/trunk
-		</connection>
-		<developerConnection>
-			scm:svn:https://jutf7.svn.sourceforge.net/svnroot/jutf7/trunk
-		</developerConnection>
+		<connection>scm:svn:https://jutf7.svn.sourceforge.net/svnroot/jutf7/trunk</connection>
+		<developerConnection>scm:svn:https://jutf7.svn.sourceforge.net/svnroot/jutf7/trunk</developerConnection>
 		<url>http://svn.sourceforge.net/jutf7</url>
 	</scm>
+	<distributionManagement>
+		<repository>
+			<id>sf-releases</id>
+			<name>Sourceforge Release Repository</name>
+			<url>scp://shell.sourceforge.net/maven2</url>
+		</repository>
+	</distributionManagement>
 	<issueManagement>
 		<system>SourceForge</system>
 		<url>http://sourceforge.net/tracker/?group_id=185176</url>
