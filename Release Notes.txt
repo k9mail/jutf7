@@ -1,0 +1,28 @@
+This library provides UTF-7 and Modified UTF-7 Charsets for Java.
+
+Sun Java 6 is recommended.
+
+Sun JRE versions before Java 6 have two bugs which make this an imperfect 
+implementation:
+- due to bug #6221056 flush is not always called, and the last few bytes of 
+  an encoded sequence may be missing if CharsetEncoder.encode(ByteBuffer) 
+  is used.
+  A hack is used to get around this: OVERFLOW is returned from the 
+  encodeLoop if the JVM detected is a 1.4 or 1.5 version, and bytes are 
+  waiting to be flushed, and the amount of bytes allocated in the output 
+  buffer does not indicate String.getBytes (or similar) was used; this
+  last method tries to always allocate sufficient bytes, and fails if
+  OVERFLOW is returned. Unfortunately a clean solution was not available, 
+  since the buggy method is declared final.
+  See Also: http://bugs.sun.com/bugdatabase/view_bug.do?bug_id=6221056
+  Please note this is not a problem if the last of the sequence is a 
+  directly encoded character in UTF-7, e.g. an alphanumeric character, 
+  space, or CR/LF.
+- additionally, you should take care before calling flush that sufficient 
+  bytes are available in the output buffer. Reinvoking the flush method of a
+  Charset(En|De)coder throws an IllegalStateException, even if it returned 
+  OVERFLOW the first time.
+  
+gij (GNU libgcj) version 4.1.1 seems to suffer a similar bug, due to which 
+the flush method is not called. The hack I described earlier does not work 
+here.
