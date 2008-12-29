@@ -3,7 +3,7 @@
 	<groupId>com.beetstra.jutf7</groupId>
 	<artifactId>jutf7</artifactId>
 	<packaging>jar</packaging>
-	<version>1.0.0</version>
+	<version>1.0.1-SNAPSHOT</version>
 	<name>jutf7</name>
 	<url>http://jutf7.sourceforge.net/</url>
 	<description>
@@ -44,9 +44,9 @@
 		<url>http://sourceforge.net</url>
 	</organization>
 	<scm>
-		<connection>scm:svn:https://jutf7.svn.sourceforge.net/svnroot/jutf7/tags/jutf7-1.0.0</connection>
-		<developerConnection>scm:svn:https://jutf7.svn.sourceforge.net/svnroot/jutf7/tags/jutf7-1.0.0</developerConnection>
-		<url>http://svn.sourceforge.net/jutf7/tags/jutf7-1.0.0</url>
+		<connection>scm:svn:https://jutf7.svn.sourceforge.net/svnroot/jutf7/trunk</connection>
+		<developerConnection>scm:svn:https://jutf7.svn.sourceforge.net/svnroot/jutf7/trunk</developerConnection>
+		<url>http://svn.sourceforge.net/jutf7</url>
 	</scm>
 	<distributionManagement>
 		<repository>
