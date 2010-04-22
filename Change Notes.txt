@@ -1,0 +1,2 @@
+FIXED 2083932 - Doesn't work with certain languages (i.e. Turkish)
+ http://sourceforge.net/tracker/index.php?func=detail&aid=2083932&group_id=185176&atid=912221
