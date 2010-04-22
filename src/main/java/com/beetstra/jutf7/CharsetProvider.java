@@ -96,7 +96,7 @@ public class CharsetProvider extends java.nio.charset.spi.CharsetProvider {
 	private static void showUsage() {
 		System.out.println("Usage: java -jar jutf7.jar [encode|decode] <text>");
 		System.out.println();
-		System.out.println("Example: java -jar jutf7 encode caf�");
+		System.out.println("Example: java -jar jutf7 encode caf\u00E9");
 		System.out.println("Result: caf+AOk-");
 	}
 }

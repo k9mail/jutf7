@@ -73,18 +73,18 @@ public class AcceptanceTest extends TestCase {
 	}
 
 	private void verifyAll() throws Exception {
-		verifySymmetrical("áéíóúäëïöüàèìòùâêîôûãõçñ€");
-		verifySymmetrical("aábécídóeúfägëhïiöjükàlèmìnòoùpâqêrîsôtûuãvõwçxñy€z");
-		verifySymmetrical("abcáéídefóúäghiëïöjklüàèmnoìòùpqrâêîstuôûãvwxõçñyz€");
-		verifySymmetrical("abcdefghijklmnopqrstuvwyxzáéíóúäëïöüàèìòùâêîôûãõçñ€abcdefghijklmnopqrstuvwyxz");
-		verifySymmetrical("aáb+écí+-dóe-úfä-+gëh+ïiö+-jük-àlè-+mìn+òoù+-pâq-êrî-+sôt+ûuã+-võwç-xñy-+€z+");
-		verifySymmetrical("á+éí+óúä+ëïö++ü++àè++ìòù+++â+++êî+++ôûã+++õçñ€");
-		verifySymmetrical("á+-éí+-óúä+-ëïö++-ü++-àè++-ìòù+++-â+++-êî+++-ôûã+++-õçñ€");
+		verifySymmetrical("\u00E1\u00E9\u00ED\u00F3\u00FA\u00E4\u00EB\u00EF\u00F6\u00FC\u00E0\u00E8\u00EC\u00F2\u00F9\u00E2\u00EA\u00EE\u00F4\u00FB\u00E3\u00F5\u00E7\u00F1\u20AC");
+		verifySymmetrical("a\u00E1b\u00E9c\u00EDd\u00F3e\u00FAf\u00E4g\u00EBh\u00EFi\u00F6j\u00FCk\u00E0l\u00E8m\u00ECn\u00F2o\u00F9p\u00E2q\u00EAr\u00EEs\u00F4t\u00FBu\u00E3v\u00F5w\u00E7x\u00F1y\u20ACz");
+		verifySymmetrical("abc\u00E1\u00E9\u00EDdef\u00F3\u00FA\u00E4ghi\u00EB\u00EF\u00F6jkl\u00FC\u00E0\u00E8mno\u00EC\u00F2\u00F9pqr\u00E2\u00EA\u00EEstu\u00F4\u00FB\u00E3vwx\u00F5\u00E7\u00F1yz\u20AC");
+		verifySymmetrical("abcdefghijklmnopqrstuvwyxz\u00E1\u00E9\u00ED\u00F3\u00FA\u00E4\u00EB\u00EF\u00F6\u00FC\u00E0\u00E8\u00EC\u00F2\u00F9\u00E2\u00EA\u00EE\u00F4\u00FB\u00E3\u00F5\u00E7\u00F1\u20ACabcdefghijklmnopqrstuvwyxz");
+		verifySymmetrical("a\u00E1b+\u00E9c\u00ED+-d\u00F3e-\u00FAf\u00E4-+g\u00EBh+\u00EFi\u00F6+-j\u00FCk-\u00E0l\u00E8-+m\u00ECn+\u00F2o\u00F9+-p\u00E2q-\u00EAr\u00EE-+s\u00F4t+\u00FBu\u00E3+-v\u00F5w\u00E7-x\u00F1y-+\u20ACz+");
+		verifySymmetrical("\u00E1+\u00E9\u00ED+\u00F3\u00FA\u00E4+\u00EB\u00EF\u00F6++\u00FC++\u00E0\u00E8++\u00EC\u00F2\u00F9+++\u00E2+++\u00EA\u00EE+++\u00F4\u00FB\u00E3+++\u00F5\u00E7\u00F1\u20AC");
+		verifySymmetrical("\u00E1+-\u00E9\u00ED+-\u00F3\u00FA\u00E4+-\u00EB\u00EF\u00F6++-\u00FC++-\u00E0\u00E8++-\u00EC\u00F2\u00F9+++-\u00E2+++-\u00EA\u00EE+++-\u00F4\u00FB\u00E3+++-\u00F5\u00E7\u00F1\u20AC");
 		verifySymmetrical("++++++++");
 		verifySymmetrical("+-++--+++---++");
-		verifySymmetrical("+áéí+");
-		verifySymmetrical("`~!@#$%^&*()_+-=[]\\{}|;':\",./<>?\u0000\r\n\t\b\f€");
-		verifySymmetrical("#aáa#á#áá#ááá#");
+		verifySymmetrical("+\u00E1\u00E9\u00ED+");
+		verifySymmetrical("`~!@#$%^&*()_+-=[]\\{}|;':\",./<>?\u0000\r\n\t\b\f\u20AC");
+		verifySymmetrical("#a\u00E1a#\u00E1#\u00E1\u00E1#\u00E1\u00E1\u00E1#");
 	}
 
 	protected void verifySymmetrical(String s) throws Exception {
@@ -116,7 +116,7 @@ public class AcceptanceTest extends TestCase {
 		return charsetEncode;
 	}
 
-	/* 
+	/*
 	 * simulate what is done in String.getBytes
 	 * (cannot be used directly since Charset is not installed while testing)
 	 */

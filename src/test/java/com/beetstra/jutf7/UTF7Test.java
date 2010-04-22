@@ -64,31 +64,32 @@ public class UTF7Test extends CharsetTest {
 		assertEquals("Hi Mom \u263A!", decode("Hi Mom +Jjo-!"));
 		assertEquals("Hi Mom -\u263A-!", decode("Hi Mom -+Jjo--!"));
 		assertEquals("\u65E5\u672C\u8A9E", decode("+ZeVnLIqe-"));
-		assertEquals("Item 3 is £1.", decode("Item 3 is +AKM-1."));
+		assertEquals("Item 3 is \u00A31.", decode("Item 3 is +AKM-1."));
 	}
 
 	public void testDecodeLong() throws Exception {
-		assertEquals("xxxÿxÿxÿÿÿÿÿÿÿ", decode("xxx+AP8-x+AP8-x+AP8A/wD/AP8A/wD/AP8-"));
+		assertEquals("xxx\u00FFx\u00FFx\u00FF\u00FF\u00FF\u00FF\u00FF\u00FF\u00FF",
+				decode("xxx+AP8-x+AP8-x+AP8A/wD/AP8A/wD/AP8-"));
 		assertEquals("\u2262\u0391123\u2262\u0391", decode("+ImIDkQ-123+ImIDkQ"));
 	}
 
 	public void testDecodeUnclosed() throws Exception {
-		assertEquals("ÿÿÿ#", decode("+AP8A/wD/#"));
-		assertEquals("ÿÿÿ#", decode("+AP8A/wD/#"));
-		assertEquals("ÿÿ#", decode("+AP8A/w#"));
-		assertEquals("#áá#ááá#", decode("#+AOEA4Q#+AOEA4QDh#"));
+		assertEquals("\u00FF\u00FF\u00FF#", decode("+AP8A/wD/#"));
+		assertEquals("\u00FF\u00FF\u00FF#", decode("+AP8A/wD/#"));
+		assertEquals("\u00FF\u00FF#", decode("+AP8A/w#"));
+		assertEquals("#\u00E1\u00E1#\u00E1\u00E1\u00E1#", decode("#+AOEA4Q#+AOEA4QDh#"));
 	}
 
 	public void testDecodeNoUnshiftAtEnd() throws Exception {
-		assertEquals("€áé", decode("+IKwA4QDp"));
-		assertEquals("#ááá", decode("#+AOEA4QDh"));
+		assertEquals("\u20AC\u00E1\u00E9", decode("+IKwA4QDp"));
+		assertEquals("#\u00E1\u00E1\u00E1", decode("#+AOEA4QDh"));
 	}
 
 	public void testDecodeMalformed() throws Exception {
 		verifyMalformed("+IKx#");
 		verifyMalformed("+IKwA#");
 		verifyMalformed("+IKwA4#");
-		assertEquals("€á", decode("+IKwA4Q"));
+		assertEquals("\u20AC\u00E1", decode("+IKwA4Q"));
 	}
 
 	public void testDecodeOptionalCharsUTF7() throws Exception {
@@ -106,7 +107,7 @@ public class UTF7Test extends CharsetTest {
 		assertEquals(CoderResult.UNDERFLOW, decoder.decode(in, out, true));
 		assertEquals(CoderResult.UNDERFLOW, decoder.flush(out));
 		out.flip();
-		assertEquals("€áé", out.toString());
+		assertEquals("\u20AC\u00E1\u00E9", out.toString());
 		decoder.reset();
 		in = CharsetTestUtil.wrap("A+ImIDkQ.");
 		out = CharBuffer.allocate(4);
@@ -118,7 +119,7 @@ public class UTF7Test extends CharsetTest {
 	private void verifyMalformed(final String string) throws UnsupportedEncodingException {
 		ByteBuffer in = CharsetTestUtil.wrap(string);
 		CharBuffer out = CharBuffer.allocate(1024);
-		CoderResult result = tested.newDecoder().decode(in, out, false); //"€#"
+		CoderResult result = tested.newDecoder().decode(in, out, false); // "\u20AC#"
 		assertTrue(result.isMalformed());
 	}
 
@@ -137,7 +138,9 @@ public class UTF7Test extends CharsetTest {
 	}
 
 	public void testEncodeLong() throws Exception {
-		assertEquals("+IKwA4QDpAPoA7QDzAP0A5ADrAO8A9gD8AP8-", encode("€áéúíóýäëïöüÿ"));
+		assertEquals(
+				"+IKwA4QDpAPoA7QDzAP0A5ADrAO8A9gD8AP8-",
+				encode("\u20AC\u00E1\u00E9\u00FA\u00ED\u00F3\u00FD\u00E4\u00EB\u00EF\u00F6\u00FC\u00FF"));
 	}
 
 	public void testEncodeShiftUnshift() throws Exception {
@@ -145,13 +148,16 @@ public class UTF7Test extends CharsetTest {
 	}
 
 	public void testEncodeAddUnshiftOnUnshift() throws Exception {
-		assertEquals("+AO0AKw--", encode("í+-"));
+		assertEquals("+AO0AKw--", encode("\u00ED+-"));
 	}
 
 	public void testEncodeNormalAndDifferent() throws Exception {
-		assertEquals("xxx+AP8-x+AP8-x+AP8A/wD/AP8A/wD/AP8-", encode("xxxÿxÿxÿÿÿÿÿÿÿ"));
-		assertEquals("+AP8A/wD/AP8-x+AP8A/wD/AP8-", encode("ÿÿÿÿxÿÿÿÿ"));
-		assertEquals("abc+AOEA6QDt-def+APMA+gDk-gh", encode("abcáéídefóúägh"));
+		assertEquals("xxx+AP8-x+AP8-x+AP8A/wD/AP8A/wD/AP8-",
+				encode("xxx\u00FFx\u00FFx\u00FF\u00FF\u00FF\u00FF\u00FF\u00FF\u00FF"));
+		assertEquals("+AP8A/wD/AP8-x+AP8A/wD/AP8-",
+				encode("\u00FF\u00FF\u00FF\u00FFx\u00FF\u00FF\u00FF\u00FF"));
+		assertEquals("abc+AOEA6QDt-def+APMA+gDk-gh",
+				encode("abc\u00E1\u00E9\u00EDdef\u00F3\u00FA\u00E4gh"));
 	}
 
 	public void testEncodeOptionalCharsUTF7() throws Exception {
@@ -160,7 +166,7 @@ public class UTF7Test extends CharsetTest {
 	}
 
 	public void testEncodeAlphabet() throws Exception {
-		assertEquals("+AL4AvgC+-", encode("¾¾¾"));
-		assertEquals("+AL8AvwC/-", encode("¿¿¿"));
+		assertEquals("+AL4AvgC+-", encode("\u00BE\u00BE\u00BE"));
+		assertEquals("+AL8AvwC/-", encode("\u00BF\u00BF\u00BF"));
 	}
 }

@@ -66,7 +66,9 @@ public class ModifiedUTF7Test extends CharsetTest {
 	}
 
 	public void testDecodeLong() throws Exception {
-		assertEquals("€αιϊνσύδλοφόÿ", decode("&IKwA4QDpAPoA7QDzAP0A5ADrAO8A9gD8AP8-"));
+		assertEquals(
+				"\u20AC\u00E1\u00E9\u00FA\u00ED\u00F3\u00FD\u00E4\u00EB\u00EF\u00F6\u00FC\u00FF",
+				decode("&IKwA4QDpAPoA7QDzAP0A5ADrAO8A9gD8AP8-"));
 	}
 
 	public void testDecodeLimitedOutput() throws Exception {
@@ -79,7 +81,7 @@ public class ModifiedUTF7Test extends CharsetTest {
 	}
 
 	public void testDecodePerfectSized() throws Exception {
-		assertEquals("€αι", decode("&IKwA4QDp-"));
+		assertEquals("\u20AC\u00E1\u00E9", decode("&IKwA4QDp-"));
 	}
 
 	public void testDecodeShiftSequence() throws Exception {
@@ -111,7 +113,7 @@ public class ModifiedUTF7Test extends CharsetTest {
 
 	public void testDecodeInvalidLength() throws Exception {
 		assertMalformed("&a-", "");
-		assertMalformed("ab&IKwD-", "ab€");
+		assertMalformed("ab&IKwD-", "ab\u20AC");
 	}
 
 	public void testDecodeUnshiftShiftSequence() throws Exception {
@@ -125,11 +127,12 @@ public class ModifiedUTF7Test extends CharsetTest {
 	}
 
 	public void testLongBadDecode() throws Exception {
-		assertMalformed("&IKwA4QDpA-", "€αι");
-		assertMalformed("&IKwA4QDpA", "€αι");
-		assertMalformed("&IKwA4QDp", "€αι");
-		assertMalformed("&IKwA4QDpAP", "€αι");
-		assertMalformed("&IKwA4QDpAPoA7QDzAP0A5ADrAO8A9gD8AP-", "€αιϊνσύδλοφό");
+		assertMalformed("&IKwA4QDpA-", "\u20AC\u00E1\u00E9");
+		assertMalformed("&IKwA4QDpA", "\u20AC\u00E1\u00E9");
+		assertMalformed("&IKwA4QDp", "\u20AC\u00E1\u00E9");
+		assertMalformed("&IKwA4QDpAP", "\u20AC\u00E1\u00E9");
+		assertMalformed("&IKwA4QDpAPoA7QDzAP0A5ADrAO8A9gD8AP-",
+				"\u20AC\u00E1\u00E9\u00FA\u00ED\u00F3\u00FD\u00E4\u00EB\u00EF\u00F6\u00FC");
 	}
 
 	public void testEncodeSimple() throws Exception {
@@ -143,22 +146,24 @@ public class ModifiedUTF7Test extends CharsetTest {
 
 	public void testEncodeComplex() throws Exception {
 		assertEquals("A&ImIDkQ-.", encode("A\u2262\u0391."));
-		assertEquals("&AO0A4Q-", encode("να"));
+		assertEquals("&AO0A4Q-", encode("\u00ED\u00E1"));
 	}
 
 	public void testEncodeLong() throws Exception {
-		assertEquals("&IKwA4QDpAPoA7QDzAP0A5ADrAO8A9gD8AP8-", encode("€αιϊνσύδλοφόÿ"));
+		assertEquals(
+				"&IKwA4QDpAPoA7QDzAP0A5ADrAO8A9gD8AP8-",
+				encode("\u20AC\u00E1\u00E9\u00FA\u00ED\u00F3\u00FD\u00E4\u00EB\u00EF\u00F6\u00FC\u00FF"));
 	}
 
 	public void testEncodeAlphabet() throws Exception {
-		assertEquals("&AL4AvgC+-", encode("ΎΎΎ"));
-		assertEquals("&AL8AvwC,-", encode("ΏΏΏ"));
+		assertEquals("&AL4AvgC+-", encode("\u00BE\u00BE\u00BE"));
+		assertEquals("&AL8AvwC,-", encode("\u00BF\u00BF\u00BF"));
 	}
 
 	public void testGetBytes() throws Exception {
-		// simulate what is done in String.getBytes 
+		// simulate what is done in String.getBytes
 		// (cannot be used directly since Charset is not installed while testing)
-		String string = "cafι";
+		String string = "caf\u00E9";
 		CharsetEncoder encoder = tested.newEncoder();
 		ByteBuffer bb = ByteBuffer.allocate((int) (encoder.maxBytesPerChar() * string.length()));
 		CharBuffer cb = CharBuffer.wrap(string);
